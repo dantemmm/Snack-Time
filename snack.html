@@ -1,0 +1,122 @@
+<!--This declares that the document is html5-->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+  <title>Snack Idea</title>
+  
+<!--Sets the favicon image to favicon.png-->  
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .snack-container {
+      text-align: center;
+      background-color: #fff;
+      border: 4px solid #ff9800;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .snack-container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      color: #ff9800;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .snack-idea {
+      font-size: 1.5rem;
+      color: #333;
+      margin-top: 1rem;
+    }
+
+    .refresh-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.1rem;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .refresh-btn:hover {
+      background-color: #e68900;
+    }
+	.btn {
+	  display: inline-block;
+	  margin-top: 2rem;
+	  padding: 0.8rem 1.5rem;
+	  font-size: 1.2rem;
+	  border: none;
+	  border-radius: 10px;
+	  cursor: pointer;
+	  background-color: #ff9800;
+	  color: white;
+	  text-decoration: none;
+	  transition: background-color 0.2s ease;
+	}
+
+	.btn:hover {
+	  background-color: #e68900;
+	}
+	
+</style>
+
+</head>
+
+<body>
+	
+  <div class="snack-container">
+    <h1 id="greeting">Hi!</h1>
+    <div class="snack-idea" id="snackIdea">Loading snack idea...</div>
+  </div>
+
+  <button class="refresh-btn" onclick="getSnack()">Ew no give me something else</button>
+  <a href="SnackTime.html" class="btn"> ← Back</a>
+ 
+
+<script>
+    const name = localStorage.getItem('username') || 'Friend'; //This tries to get a value called 'username' from the browser's local storage
+    document.getElementById('greeting').textContent = `Hi ${name}, here's your snack idea:`; //Finds the HTML element with id="greeting" and sets its text content
+
+    function getSnack() {
+      fetch('https://www.themealdb.com/api/json/v1/1/random.php') //This sends a request to a free API that returns a random meal idea (from TheMealDB.com)
+        .then(response => response.json())
+        .then(data => {
+          const meal = data.meals[0];
+          const mealName = meal.strMeal;
+          document.getElementById('snackIdea').textContent = mealName;
+        })
+        .catch(error => {
+          console.error('Error fetching snack:', error);
+          document.getElementById('snackIdea').textContent = "Couldn't fetch a snack. Try again!";
+        });
+    }
+    getSnack();
+	
+</script>
+	
+</body>
+
+</html>
+

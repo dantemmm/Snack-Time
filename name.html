@@ -1,0 +1,101 @@
+<!--This declares that the document is html5-->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+  <title>What Is Your Name?</title>
+  
+<!--Sets the favicon image to favicon.png-->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+	  
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #ff9800;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 2px solid #ff9800;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #e68900;
+    }
+	.btn {
+	  display: inline-block;
+	  margin-top: 2rem;
+	  padding: 0.8rem 1.5rem;
+	  font-size: 1.2rem;
+	  border: none;
+	  border-radius: 10px;
+	  cursor: pointer;
+	  background-color: #ff9800;
+	  color: white;
+	  text-decoration: none;
+	  transition: background-color 0.2s ease;
+	}
+
+	.btn:hover {
+	  background-color: #e68900;
+	}
+
+</style>
+
+</head>
+
+<body>
+<!--Input Type="text" is a basic input-->
+<!--id="nameInput" gives it a unique identifier so JavaScript can interact with it-->
+<!--placeholder="Enter your name here" shows this light gray prompt inside the box until the user types something.-->
+	
+  <h1>What is your name?</h1>
+  <input type="text" id="nameInput" placeholder="Enter your name here">
+  <button class="btn" onclick="submitName()">Submit</button>
+  <a href="SnackTime.html" class="btn"> ← Back</a>
+
+<script>
+	
+    function submitName() {
+      const name = document.getElementById('nameInput').value;
+      if (name.trim() === '') {
+        alert("Since when do people not have a name?");
+        return;
+      }
+      // Store name in localStorage and go to next page
+      localStorage.setItem('username', name);
+      window.location.href = 'snack.html';
+    }
+	
+</script>
+	
+</body>
+
+</html>
+
